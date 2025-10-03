@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args)
     {
         IAppBuilder builder = new AppBuilder();
-        CalculatorApp app = builder.buildApp();
+        CalculatorApp app = builder.buildApp(args);
         app.Run();
     }
 }

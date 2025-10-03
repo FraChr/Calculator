@@ -13,7 +13,6 @@ public class TokenizeExpression implements ITokenizeExpression {
         Pattern regex = Pattern.compile("\\d*\\.?\\d+|[-+*/()]");
         Matcher matcher = regex.matcher(expression);
 
-
         while(matcher.find())
         {
             tokens.add(matcher.group());
