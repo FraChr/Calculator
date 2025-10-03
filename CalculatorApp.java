@@ -1,6 +1,7 @@
 package Calculator;
 import java.util.*;
 
+import Calculator.Data.UiStrings;
 import Calculator.Parser.IParseToken;
 import Calculator.Render.IRenderCmd;
 import Calculator.Tokenizer.ITokenizeExpression;
@@ -24,11 +25,10 @@ public class CalculatorApp {
     }
 
     public void Run() {
-    //    IUserInput i = new UserInput();
-        render.PromptInput("Enter math expression");
+        render.PromptInput(UiStrings.InputPrompt);
         userInput.InputExpression();
 
-        String expression = userInput.GetInput();
+        String expression = userInput.GetExpression();
 
         List<String> tokens = tokenizeExpression.Tokenize(expression);
 

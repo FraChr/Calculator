@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
-import java.util.regex.Pattern;
 
 public class ParseToken implements IParseToken {
 
@@ -12,7 +11,7 @@ public class ParseToken implements IParseToken {
     private static String _isOperator = "[-+*/()]";
 
     
-    
+    @Override
     public double parseExpression(List<String> expression)
     {
         List<String> postfix = infixToPostFix(expression);

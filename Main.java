@@ -9,6 +9,5 @@ public class Main {
         IAppBuilder builder = new AppBuilder();
         CalculatorApp app = builder.buildApp();
         app.Run();
-
     }
 }
