@@ -22,7 +22,7 @@ public class CalculatorApp {
     public void Run() {
     //    IUserInput i = new UserInput();
 
-       userInput.InputExpression();
+        userInput.InputExpression();
 
         String expression = userInput.GetInput();
 
