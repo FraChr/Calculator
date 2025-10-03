@@ -10,18 +10,5 @@ public class Main {
         CalculatorApp app = builder.buildApp();
         app.Run();
 
-
-        // IUserInput input = new UserInput();
-        // ITokenizeExpression tokenize = new TokenizeExpression();
-        // IParseToken parse = new ParseToken();
-
-
-        // CalculatorApp app = new CalculatorApp(input, tokenize, parse);
-        // app.Run();
-
-        // for(int i = 0; i < args.length; i++)
-        // {
-        //     System.out.println(args[i]);
-        // }
     }
 }
