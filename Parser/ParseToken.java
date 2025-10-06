@@ -4,20 +4,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import Calculator.Data.Regex;
+
 public class ParseToken implements IParseToken {
 
-    private static String _isOperand = "\\d*\\.?\\d+";
+    private static String _isOperand = Regex.matchNumbers;
+    private static String _isOperator = Regex.matchOperators;
 
-    private static String _isOperator = "[-+*/()]";
-
-    
     @Override
     public double parseExpression(List<String> expression)
     {
         List<String> postfix = infixToPostFix(expression);
         return evaluatePostFix(postfix);
     }
-
 
     private List<String> infixToPostFix(List<String> tokens)
     {
@@ -55,7 +54,6 @@ public class ParseToken implements IParseToken {
                     operators.pop();
                 }
             }
-
 
             else if (token.matches(_isOperator))
             {

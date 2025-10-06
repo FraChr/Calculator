@@ -4,6 +4,7 @@ import Calculator.Arguments.IAppCommand;
 import Calculator.Parser.IParseToken;
 import Calculator.Render.IRenderCmd;
 import Calculator.Tokenizer.ITokenizeExpression;
+import Calculator.Validation.ExpressionValidation;
 
 public class CommandFactory implements ICommandFactory {
 
@@ -25,6 +26,13 @@ public class CommandFactory implements ICommandFactory {
     @Override
     public IAppCommand createCalcCommand(String expression) {
         return () -> {
+            String error = ExpressionValidation.ValidateExpression(expression);
+            if(error != null) {
+                render.RenderError(error + "\n");
+                render.RenderHelp();
+                return;
+            }
+            
             var tokens = tokenizeExpression.Tokenize(expression);
             double result = parseToken.parseExpression(tokens);
             render.RenderResult(result);

@@ -8,4 +8,11 @@ public abstract class UiStrings {
                                             -h | -help ---> for this help text
                                             -c | -calc [expression] ---> to run calculation
                                           """;
+
+    public static final String InvalidChars = """
+                                                Expression can contian number 0-9
+                                                operator '-', '+', '/', '*', '(', ')'
+                                              """;
+
+    public static final String EndsWithOperator = "Exression cannot end with operator";
 }

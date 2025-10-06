@@ -1,6 +1,9 @@
 package Calculator.Tokenizer;
 import java.util.*;
 import java.util.regex.Pattern;
+
+import Calculator.Data.Regex;
+
 import java.util.regex.Matcher;
 
 public class TokenizeExpression implements ITokenizeExpression {
@@ -10,7 +13,8 @@ public class TokenizeExpression implements ITokenizeExpression {
     {
         List<String> tokens = new ArrayList<>();
 
-        Pattern regex = Pattern.compile("\\d*\\.?\\d+|[-+*/()]");
+        Pattern regex = Pattern.compile(Regex.matchNumbers + "|" + Regex.matchOperators);
+        
         Matcher matcher = regex.matcher(expression);
 
         while(matcher.find())

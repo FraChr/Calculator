@@ -14,6 +14,11 @@ public class CalculatorApp {
     }
 
     public void Run() {
-        argsParser.runArg().execute();
+        try {
+            argsParser.runArg().execute();  
+        } catch (Throwable t) {
+            System.out.println(t.getMessage());
+        }
+        
     }
 }

@@ -3,6 +3,7 @@ package Calculator.Render;
 import Calculator.Data.UiStrings;
 
 public class RenderCmd implements IRenderCmd {
+
     @Override
     public <T> void RenderResult(T value) {
         System.out.printf("%s %s", UiStrings.Result, value);
@@ -15,5 +16,8 @@ public class RenderCmd implements IRenderCmd {
     public void RenderHelp() {
         System.out.printf("%s ", UiStrings.HelpText);
     }
-   
+
+    public <T> void RenderError(T error){
+        System.out.printf("%s ", error);
+    }
 }

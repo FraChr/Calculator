@@ -4,4 +4,5 @@ public interface IRenderCmd {
     public <T> void RenderResult(T Value);
     public <T> void PromptInput(T prompt);
     public void RenderHelp();
+    public <T> void RenderError(T error);
 }
