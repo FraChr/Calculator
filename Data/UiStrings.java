@@ -1,6 +1,9 @@
 package Calculator.Data;
 
-public abstract class UiStrings {
+public final class UiStrings {
+
+    private UiStrings() {};
+
     public static final String InputPrompt = "Enter math Expression";
     public static final String Result = "Result: ";
     public static final Character PromptCaret = '>';
@@ -15,4 +18,5 @@ public abstract class UiStrings {
                                               """;
 
     public static final String EndsWithOperator = "Exression cannot end with operator";
+    public static final String MismatchedParentheses = "Missmatched parenthesis in expression";
 }

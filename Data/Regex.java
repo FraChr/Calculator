@@ -1,7 +1,11 @@
 package Calculator.Data;
 
-public abstract class Regex {
-    public static String matchOperators = "[-+*/()]";
-    public static String matchNumbers = "\\d*\\.?\\d+";
-    public static String validChars = "[0-9+\\-*/().\\s]+";
+public final class Regex {
+
+    private Regex() {}
+
+    public static final String alternation = "|";
+    public static final String matchOperators = "[-+*/()]";
+    public static final String matchNumbers = "-?\\d*\\.?\\d+";
+    public static final String validChars = "[0-9+\\-*/().\\s]+";
 }

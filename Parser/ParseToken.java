@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import Calculator.Data.Operator;
+import Calculator.Data.Parenthesis;
 import Calculator.Data.Regex;
 
 public class ParseToken implements IParseToken {
@@ -38,18 +40,18 @@ public class ParseToken implements IParseToken {
             }
 
 
-            else if (token.equals("("))
+            else if (token.equals(Parenthesis.LEFT.getSymbol()))
             {
                 operators.push(token);
             }
 
-            else if(token.equals(")"))
+            else if(token.equals(Parenthesis.RIGHT.getSymbol()))
             {
-                while(!operators.isEmpty() && !operators.peek().equals("("))
+                while(!operators.isEmpty() && !operators.peek().equals(Parenthesis.LEFT.getSymbol()))
                 {
                     output.add(operators.pop());
                 }
-                if(!operators.isEmpty() && operators.peek().equals("("))
+                if(!operators.isEmpty() && operators.peek().equals(Parenthesis.LEFT.getSymbol()))
                 {
                     operators.pop();
                 }
@@ -58,7 +60,7 @@ public class ParseToken implements IParseToken {
             else if (token.matches(_isOperator))
             {
                 while(!operators.isEmpty()
-                    && !operators.peek().equals("(")
+                    && !operators.peek().equals(Parenthesis.LEFT.getSymbol())
                     && precedence.get(token) <= precedence.get(operators.peek()))
                     {
                         output.add(operators.pop());
@@ -69,9 +71,9 @@ public class ParseToken implements IParseToken {
         
             while(!operators.isEmpty())
             {
-              output.add(operators.pop());
+                output.add(operators.pop());
             }
-            System.out.println("from infixToPostFix" + output);
+
             return output;
     }
 
@@ -90,14 +92,9 @@ public class ParseToken implements IParseToken {
             {
                 double val1 = values.pop();
                 double val2 = values.pop();
-
-                switch(token)
-                {
-                    case "+": values.push(val2 + val1); break;
-                    case "-": values.push(val2 - val1); break;
-                    case "*": values.push(val2 * val1); break;
-                    case "/": values.push(val2 / val1); break;
-                }
+                
+                Operator op = Operator.fromSymbol(token.charAt(0));
+                values.push(op.apply(val1, val2));
             }
         }
 

@@ -1,6 +1,7 @@
 package Calculator.Validation;
 
 import Calculator.Data.Operator;
+import Calculator.Data.Parenthesis;
 import Calculator.Data.Regex;
 import Calculator.Data.UiStrings;
 
@@ -23,12 +24,27 @@ public final class ExpressionValidation {
         return !expression.matches(Regex.validChars);
     }
 
+    private static boolean hasMismatchedParentheses(String expression) {
+        int count = 0;
+        for (String s : expression.split("")) {
+            if (s.equals(Parenthesis.LEFT.getSymbol())) count++;
+            else if (s.equals(Parenthesis.RIGHT.getSymbol())) {
+                count--;
+                if (count < 0) return true;
+            }
+        }
+        return count != 0;
+    }
+
     public static String ValidateExpression(String expression) {
         if(endsWithOperator(expression)) {
             return UiStrings.EndsWithOperator;
         }
         if(ContainsInvalidChar(expression)){
             return UiStrings.InvalidChars;
+        }
+        if(hasMismatchedParentheses(expression)) {
+            return UiStrings.MismatchedParentheses;
         }
         return null;
     }
