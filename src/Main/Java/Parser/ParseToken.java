@@ -90,7 +90,8 @@ public class ParseToken implements IParseToken {
                 double val1 = values.pop();
                 double val2 = values.pop();
 
-                if(val1 <= 0) {
+                // division by zero guard
+                if(val1 <= 0 && token.equals(Operator.DIVISON.getSymbolAsString())) {
                     return new Result(0.0, true, UiStrings.DivisionByZeroError);
                 }
                 
