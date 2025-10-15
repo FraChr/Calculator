@@ -1,25 +1,25 @@
 package Calculator.src.Main.Java.Data;
 
 public enum Operator {
-    ADD('+'){
+    ADD('+', 1){
         @Override
         public double apply(double a, double b){
             return a + b;
         }
     },
-    SUBTRACT('-'){
+    SUBTRACT('-', 1){
         @Override
         public double apply(double a, double b){
             return a - b;
         }
     },
-    MULTIPLY('*'){
+    MULTIPLY('*', 2){
         @Override
         public double apply(double a, double b){
             return a * b;
         }
     },
-    DIVISON('/') {
+    DIVISON('/', 2) {
         @Override
         public double apply(double a, double b){
             return a / b;
@@ -27,13 +27,23 @@ public enum Operator {
     };
 
     private char symbol;
+    private int precedence;
 
-    Operator(char symbol) {
+    Operator(char symbol, int precedence) {
         this.symbol = symbol;
+        this.precedence = precedence;
     }
 
     public char getSymbol() {
         return symbol;
+    }
+
+    public String getSymbolAsString() {
+        return String.valueOf(symbol);
+    }
+
+    public int getPrecendence() {
+        return precedence;
     }
 
     public static Operator fromSymbol(char c) {

@@ -2,6 +2,8 @@ package Calculator.src.Test.Java;
 
 import org.junit.Test;
 
+import Calculator.src.Main.Java.Data.Result;
+import Calculator.src.Main.Java.Data.UiStrings;
 import Calculator.src.Main.Java.Parser.ParseToken;
 
 import java.util.*;
@@ -15,9 +17,51 @@ public class ParseTokenTest {
         ParseToken parser = new ParseToken();
 
         List<String> expression = Arrays.asList("2", "+", "2");
-        double result = parser.parseExpression(expression);
+        Result result = parser.parseExpression(expression);
 
-        assertEquals(4.0, result, delta);
+        assertEquals(4.0, result.result, delta);
+    }
+
+    @Test
+    public void testSimpleSubtraction() {
+        ParseToken parser = new ParseToken();
+
+        List<String> expression = Arrays.asList("5", "-", "2");
+        Result result = parser.parseExpression(expression);
+
+        assertEquals(3, result.result, delta);
+    }
+
+    @Test
+    public void testSimpleMultiplication() {
+        ParseToken parser = new ParseToken();
+
+        List<String> expression = Arrays.asList("2", "*", "2");
+        Result result = parser.parseExpression(expression);
+
+        assertEquals(4, result.result, delta);
+    }
+
+    @Test
+    public void testSimpleDivision() {
+        ParseToken parser = new ParseToken();
+
+        List<String> expression = Arrays.asList("5", "/", "2");
+        Result result = parser.parseExpression(expression);
+
+        assertEquals(2.5, result.result, delta);
+    }
+
+    @Test
+    public void testSimpleDivisionByZero() {
+        ParseToken parser = new ParseToken();
+
+        List<String> expression = Arrays.asList("5", "/", "0");
+        Result result = parser.parseExpression(expression);
+
+        assertTrue(result.isError);
+        assertEquals(UiStrings.DivisionByZeroError, result.errorMessage);
+        assertEquals(0.0, result.result, delta);
     }
 
     @Test
@@ -25,9 +69,9 @@ public class ParseTokenTest {
         ParseToken parser = new ParseToken();
 
         List<String> expression = Arrays.asList("(", "5", "+", "3", ")", "*", "2");
-        double result = parser.parseExpression(expression);
+        Result result = parser.parseExpression(expression);
 
-        assertEquals(16, result, delta);
+        assertEquals(16, result.result, delta);
     }
 
     @Test
@@ -35,9 +79,19 @@ public class ParseTokenTest {
         ParseToken parser = new ParseToken();
 
         List<String> expression = Arrays.asList("10", "+", "5", "-", "100");
-        double result = parser.parseExpression(expression);
+        Result result = parser.parseExpression(expression);
 
-        assertEquals(-85, result, delta);
+        assertEquals(-85, result.result, delta);
+    }
+
+    @Test
+    public void testNegativeSum() {
+        ParseToken parser = new ParseToken();
+
+        List<String> expression = Arrays.asList("0", "-", "(", "2", "+", "2", ")");
+        Result result = parser.parseExpression(expression);
+
+        assertEquals(-4, result.result, delta);
     }
     
 }

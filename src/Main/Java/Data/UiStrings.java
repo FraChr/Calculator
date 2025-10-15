@@ -19,4 +19,5 @@ public final class UiStrings {
 
     public static final String EndsWithOperator = "Exression cannot end with operator";
     public static final String MismatchedParentheses = "Missmatched parenthesis in expression";
+    public static final String DivisionByZeroError = "Cannot divide by zero";
 }

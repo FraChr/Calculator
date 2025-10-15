@@ -15,8 +15,6 @@ public class TokenizeExpression implements ITokenizeExpression {
     {
         List<String> tokens = new ArrayList<>();
 
-        // Pattern regex = Pattern.compile(Regex.matchNumbers + Regex.alternation + Regex.matchOperators);
-
         Pattern regex = Pattern.compile(Regex.matchPlainNumbers + Regex.alternation + Regex.matchOperators);
         
         Matcher matcher = regex.matcher(expression);
@@ -36,31 +34,50 @@ public class TokenizeExpression implements ITokenizeExpression {
         {
             String token = tokens.get(i);
             
-            if(unaryMinus(i, tokens)) {
-                processedTokens.add("-" + tokens.get(i + 1));
-                i++;
+            if(isUnaryOperator(i, tokens, Operator.SUBTRACT.getSymbolAsString())) {
+                i = addUnaryMinus(i, tokens, processedTokens);
+                continue;
+            }
+
+            if(isUnaryOperator(i, tokens, Operator.ADD.getSymbolAsString())) {
                 continue;
             }
            
             processedTokens.add(token);
+
             if(needsImplicitMultiply(i, tokens)){
                 processedTokens.add(String.valueOf(Operator.MULTIPLY.getSymbol()));
             }
-
-
-            
         }
         System.out.println("Prossesed tokens: " + processedTokens);
         return processedTokens;
     }
 
-    // unary minus at start of expression or after a paren ( or after an operator
-    private boolean unaryMinus(int index, List<String> tokens){
+    private int addUnaryMinus(int index, List<String> tokens, List<String> processedTokens) {
+        String next = tokens.get(index + 1);
+        String unaryMinusBase = "0";
+        // adding a 0 to negative sum expression e.g -(2+2)
+        // otherwise add unary minus
+        if(next.equals(Parenthesis.LEFT.getSymbol())){
+            processedTokens.add(unaryMinusBase);
+            processedTokens.add(Operator.SUBTRACT.getSymbolAsString());
+        } else {
+            processedTokens.add(Operator.SUBTRACT.getSymbolAsString() + next);
+            index++;
+        }
+        return index;
+    }
+
+    // unary operator at start of expression or after a paren ( or after an operator
+    private boolean isUnaryOperator(int index, List<String> tokens, String op){
+
+        if(!op.equals(Operator.ADD.getSymbolAsString()) || !op.equals(Operator.SUBTRACT.getSymbolAsString())) return false;
+
         if(index < 0 || index + 1 >= tokens.size()) return false;
 
         String current = tokens.get(index);
         
-        if(!current.equals(String.valueOf(Operator.SUBTRACT.getSymbol()))) return false;
+        if(!current.equals(op)) return false;
 
         if(index == 0) return true;
 

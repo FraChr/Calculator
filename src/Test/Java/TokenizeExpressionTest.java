@@ -62,4 +62,26 @@ public class TokenizeExpressionTest {
         assertEquals(expected, result);
     }
 
+    @Test
+    public void testNegativeSumTokenizing() {
+        TokenizeExpression tokenizer = new TokenizeExpression();
+
+        String expression = "-(2+2)";
+        List<String> expected = Arrays.asList("0", "-", "(", "2", "+", "2", ")");
+        List<String> result = tokenizer.Tokenize(expression);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void testUnaryAddition() {
+        TokenizeExpression tokenizer = new TokenizeExpression();
+
+        String expression = "+(2+2)";
+        List<String> expected = Arrays.asList("(", "2", "+", "2", ")");
+        List<String> result = tokenizer.Tokenize(expression);
+
+        assertEquals(expected, result);
+    }
+
 }

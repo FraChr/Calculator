@@ -1,12 +1,13 @@
 package Calculator.src.Main.Java.Parser;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 import Calculator.src.Main.Java.Data.Operator;
 import Calculator.src.Main.Java.Data.Parenthesis;
 import Calculator.src.Main.Java.Data.Regex;
+import Calculator.src.Main.Java.Data.Result;
+import Calculator.src.Main.Java.Data.UiStrings;
 
 public class ParseToken implements IParseToken {
 
@@ -14,23 +15,17 @@ public class ParseToken implements IParseToken {
     private static String _isOperator = Regex.matchOperators;
 
     @Override
-    public double parseExpression(List<String> expression)
+    public Result parseExpression(List<String> expression)
     {
         List<String> postfix = infixToPostFix(expression);
         return evaluatePostFix(postfix);
     }
+    
 
     private List<String> infixToPostFix(List<String> tokens)
     {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
-
-        Map<String, Integer> precedence = Map.of(
-            "+", 1,
-            "-", 1,
-            "*", 2,
-            "/", 2
-        );
 
         for(String token : tokens)
         {
@@ -59,9 +54,10 @@ public class ParseToken implements IParseToken {
 
             else if (token.matches(_isOperator))
             {
+                Operator currentOp = Operator.fromSymbol(token.charAt(0));
                 while(!operators.isEmpty()
                     && !operators.peek().equals(Parenthesis.LEFT.getSymbol())
-                    && precedence.get(token) <= precedence.get(operators.peek()))
+                    && Operator.fromSymbol(operators.peek().charAt(0)).getPrecendence() >= currentOp.getPrecendence())
                     {
                         output.add(operators.pop());
                     }
@@ -77,7 +73,8 @@ public class ParseToken implements IParseToken {
             return output;
     }
 
-    private double evaluatePostFix(List<String> postfix)
+
+    private Result evaluatePostFix(List<String> postfix)
     {
         Stack<Double> values = new Stack<>();
         
@@ -92,12 +89,16 @@ public class ParseToken implements IParseToken {
             {
                 double val1 = values.pop();
                 double val2 = values.pop();
+
+                if(val1 <= 0) {
+                    return new Result(0.0, true, UiStrings.DivisionByZeroError);
+                }
                 
                 Operator op = Operator.fromSymbol(token.charAt(0));
                 values.push(op.apply(val2, val1));
             }
         }
 
-        return values.pop();
+        return new Result(values.pop(), false, "");
     }
 }
