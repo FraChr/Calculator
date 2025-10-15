@@ -71,7 +71,7 @@ public class TokenizeExpression implements ITokenizeExpression {
     // unary operator at start of expression or after a paren ( or after an operator
     private boolean isUnaryOperator(int index, List<String> tokens, String op){
 
-        if(!op.equals(Operator.ADD.getSymbolAsString()) || !op.equals(Operator.SUBTRACT.getSymbolAsString())) return false;
+        if(!op.equals(Operator.ADD.getSymbolAsString()) && !op.equals(Operator.SUBTRACT.getSymbolAsString())) return false;
 
         if(index < 0 || index + 1 >= tokens.size()) return false;
 
