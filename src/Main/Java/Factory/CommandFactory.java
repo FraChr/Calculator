@@ -2,6 +2,7 @@ package Calculator.src.Main.Java.Factory;
 
 import Calculator.src.Main.Java.Arguments.IAppCommand;
 import Calculator.src.Main.Java.Data.Result;
+import Calculator.src.Main.Java.Data.UiStrings;
 import Calculator.src.Main.Java.Parser.IParseToken;
 import Calculator.src.Main.Java.Render.IRenderCmd;
 import Calculator.src.Main.Java.Tokenizer.ITokenizeExpression;
@@ -48,4 +49,11 @@ public class CommandFactory implements ICommandFactory {
                 
         };
     }
+
+    public IAppCommand createDrawCommand() {
+        return () -> {
+            render.Render(UiStrings.DrawCake);
+        };
+    }
+
 }

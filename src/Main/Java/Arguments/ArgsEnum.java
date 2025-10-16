@@ -6,6 +6,7 @@ import java.util.Arrays;
 public enum ArgsEnum {
     HELP("-h", "-help"),
     CALC("-c", "-calc"),
+    DRAW("-d", "-draw"),
     UNKNOWN("");
 
 

@@ -93,5 +93,25 @@ public class ParseTokenTest {
 
         assertEquals(-4, result.result, delta);
     }
+
+    @Test
+    public void testNegativeNumAfterOperator() {
+        ParseToken parser = new ParseToken();
+
+        var expression = Arrays.asList("2", "+", "-2");
+        var result = parser.parseExpression(expression);
+
+        assertEquals(0, result.result, delta);
+    }
+
+    @Test
+    public void testNegativeNumAtStart() {
+        ParseToken parser = new ParseToken();
+
+        var expression = Arrays.asList("-2", "+", "2");
+        var result = parser.parseExpression(expression);
+
+        assertEquals(0, result.result, delta);
+    }
     
 }

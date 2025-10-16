@@ -5,9 +5,15 @@ import Calculator.src.Main.Java.Data.UiStrings;
 public class RenderCmd implements IRenderCmd {
 
     @Override
+    public <T> void Render(T value) {
+        System.out.println(value);
+    }
+
+    @Override
     public <T> void RenderResult(T value) {
         System.out.printf("%s %s", UiStrings.Result, value);
     }
+
     @Override
     public <T> void PromptInput(T prompt) {
         System.out.printf("%s %s ", prompt, UiStrings.PromptCaret);
@@ -20,4 +26,6 @@ public class RenderCmd implements IRenderCmd {
     public <T> void RenderError(T error){
         System.out.printf("%s ", error);
     }
+
+    
 }

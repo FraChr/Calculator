@@ -24,18 +24,32 @@ public class ArgsParser implements IArgsParser {
                     return commandFactory.createHelpCommand();
                 case CALC:
                     return handleCalcCommand(i);
+                case DRAW:
+                    return commandFactory.createDrawCommand();
                 default:
                     return commandFactory.createHelpCommand();
             }
         }
-        return () -> {};
+        return commandFactory.createHelpCommand();
     }
 
+    
     private IAppCommand handleCalcCommand(int currentIndex) {
-        if(currentIndex + 1 < args.length) {
-            String expression = args[currentIndex + 1];
+        if(isExpression(currentIndex)){
+            String expression = getExpression(currentIndex);
             return commandFactory.createCalcCommand(expression);
         }
+        
         return commandFactory.createHelpCommand();
+    }
+    
+    private boolean isExpression(int currentIndex) {
+        if(currentIndex + 1 < args.length) return true;
+        else return false;
+    }
+    
+    private String getExpression(int currentIndex) {
+            String expression = args[currentIndex + 1];
+            return expression;
     }
 }
