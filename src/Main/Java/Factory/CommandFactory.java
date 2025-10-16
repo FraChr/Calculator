@@ -28,7 +28,6 @@ public class CommandFactory implements ICommandFactory {
     @Override
     public IAppCommand createCalcCommand(String expression) {
         return () -> {
-            System.out.println("raw expression " + expression);
             String error = ExpressionValidation.ValidateExpression(expression);
             if(error != null) {
                 render.RenderError(error + "\n");

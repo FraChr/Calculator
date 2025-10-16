@@ -69,7 +69,7 @@ public class ParseToken implements IParseToken {
             {
                 output.add(operators.pop());
             }
-            System.out.println("infixToPostfix order: " + output);
+
             return output;
     }
 
