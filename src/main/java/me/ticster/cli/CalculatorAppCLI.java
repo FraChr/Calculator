@@ -1,17 +1,17 @@
 package me.ticster.cli;
 
 import me.ticster.cli.Arguments.IArgsParser;
-import me.ticster.cli.Render.IRenderCmd;
 import me.ticster.core.Data.CommandResult;
+import me.ticster.core.Render.IRenderer;
 
 
 
 public class CalculatorAppCLI implements ICalculatorAppCLI {
     
     private final IArgsParser argsParser;
-    private final IRenderCmd render;
+    private final IRenderer render;
 
-    public CalculatorAppCLI(IArgsParser argsParser, IRenderCmd render)
+    public CalculatorAppCLI(IArgsParser argsParser, IRenderer render)
     {
         this.argsParser = argsParser;
         this.render = render;

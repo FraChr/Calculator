@@ -1,8 +1,9 @@
 package me.ticster.cli.Render;
 
 import me.ticster.core.Data.UiStrings;
+import me.ticster.core.Render.IRenderer;
 
-public class RenderCmd implements IRenderCmd {
+public class RenderCmd implements IRenderer {
 
     @Override
     public <T> void Render(T value) {
@@ -25,6 +26,12 @@ public class RenderCmd implements IRenderCmd {
 
     public <T> void RenderError(T error){
         System.out.printf("%s ", error);
+    }
+
+    @Override
+    public void clear() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'clear'");
     }
 
     

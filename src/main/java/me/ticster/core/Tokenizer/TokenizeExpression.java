@@ -25,6 +25,7 @@ public class TokenizeExpression implements ITokenizeExpression {
         }
 
         return processTokens(tokens);
+        
     }
 
     private List<String> processTokens(List<String> tokens){
@@ -49,7 +50,7 @@ public class TokenizeExpression implements ITokenizeExpression {
                 processedTokens.add(String.valueOf(Operator.MULTIPLY.getSymbol()));
             }
         }
-
+        System.out.println(processedTokens);
         return processedTokens;
     }
 
