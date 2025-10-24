@@ -3,7 +3,6 @@ me\ticster\core\Data\Operator$3.class
 me\ticster\gui\CalculatorFxMain.class
 me\ticster\gui\CalculatorAppGUIController$1.class
 me\ticster\cli\CalculatorAppCLI$1.class
-me\ticster\gui\Setup.class
 me\ticster\core\Data\CommandResult$Status.class
 me\ticster\core\Data\Result.class
 me\ticster\cli\Arguments\IArgsParser.class
