@@ -90,8 +90,6 @@ public class ParseToken implements IParseToken {
                 double val1 = values.pop();
                 double val2 = values.pop();
 
-                System.out.printf("Val 1 = %f | Val 2 = %f", val1, val2);
-
                 // division by zero guard
                 if(val1 <= 0 && token.equals(Operator.DIVISON.getSymbolAsString())) {
                     return new Result(0.0, true, UiStrings.DivisionByZeroError);

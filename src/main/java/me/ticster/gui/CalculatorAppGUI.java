@@ -27,6 +27,9 @@ public class CalculatorAppGUI implements ICalculatorAppGUI{
     public void Run(Stage primaryStage) {
         Map<String, Consumer<String>> actions = createActionMap();
 
+        final int minWidth = 350;
+        final int minHeight = 510;
+
         Consumer<String> onClick = symbol -> 
         actions.getOrDefault(symbol, actions.get("default")).accept(symbol);
         
@@ -34,7 +37,8 @@ public class CalculatorAppGUI implements ICalculatorAppGUI{
         
         Scene scene = GuiFactory.createScene(inputField, gridButtons);
         primaryStage.setScene(scene);
-        primaryStage.sizeToScene();
+        primaryStage.setMinWidth(minWidth);
+        primaryStage.setMinHeight(minHeight);
         primaryStage.show();
     }
 

@@ -50,7 +50,6 @@ public class TokenizeExpression implements ITokenizeExpression {
                 processedTokens.add(String.valueOf(Operator.MULTIPLY.getSymbol()));
             }
         }
-        System.out.println(processedTokens);
         return processedTokens;
     }
 
