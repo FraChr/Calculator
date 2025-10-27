@@ -4,7 +4,7 @@ Simple Calculator with GUI and cli version
 open cmd/terminal in wanted directory
 `cd /path/to/dir`
 `command: git clone https://github.com/FraChr/Calculator.git`
-### Windows
+## Windows
 commands: 
 `cd path/to/gitclone-directory`
 `mvnw.cmd clean install`
@@ -12,7 +12,7 @@ commands:
 `java -cp target/classes me.ticster.cli.MainCLI`
 #### GUI Version:
 `mvnw.cmd javafx:run`
-### Linux
+## Linux
 commands:
 `cd path/to/gitclone-directory`
 `chmod +x mvnw`
