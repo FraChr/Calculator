@@ -5,19 +5,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import me.ticster.core.Data.Operator;
@@ -28,20 +24,19 @@ public class GuiFactory {
     private static double height = Double.MAX_VALUE;
     private static String fontType = "Verdana";
 
-
-
     public static TextField createTextField() {
         TextField tf = new TextField();
         // tf.setPrefWidth(100);
         // tf.setPrefHeight(100);
 
         tf.setMaxWidth(width);
-        tf.setMaxHeight(300);
+        tf.setMaxHeight(height);
 
         
 
         tf.heightProperty().addListener((observable, oldVal, newVal) -> {
-            double fontSize = Math.min(newVal.doubleValue() * 0.3, 40);
+            // double fontSize = Math.min(newVal.doubleValue() * 0.3, 40);
+            double fontSize = newVal.doubleValue() * 0.2;
             tf.setFont(Font.font(fontType, FontWeight.BOLD, fontSize));
         });
         return tf;
@@ -68,6 +63,7 @@ public class GuiFactory {
 
     public static Scene createScene(TextField inputField, GridPane buttonsGrid) {
         BorderPane root = createMainLayout(inputField, buttonsGrid);
+        
         // root.setBackground(Background.fill(Paint.valueOf("Blue")));
         return new Scene(root);
     }

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import me.ticster.core.Factory.ICommandFactory;
@@ -27,6 +28,9 @@ public class CalculatorAppGUI implements ICalculatorAppGUI{
     public void Run(Stage primaryStage) {
         Map<String, Consumer<String>> actions = createActionMap();
 
+        Image icon = new Image(getClass().getResourceAsStream("/images/CalculatorAppList.scale-100.png"));
+        
+
         final int minWidth = 350;
         final int minHeight = 510;
 
@@ -36,6 +40,8 @@ public class CalculatorAppGUI implements ICalculatorAppGUI{
         this.gridButtons = GuiFactory.createGridButtons(onClick);
         
         Scene scene = GuiFactory.createScene(inputField, gridButtons);
+        primaryStage.getIcons().add(icon);
+        primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(minWidth);
         primaryStage.setMinHeight(minHeight);
