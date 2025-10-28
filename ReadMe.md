@@ -1,6 +1,10 @@
 # Simple Calculator
 Simple Calculator with GUI and cli version
-## installation
+
+## Requirements
+java 17+ Avaliable on `https://www.java.com/en/`
+
+## To Use
 open cmd/terminal in wanted directory<br>
 `cd /path/to/dir`<br>
 ```
